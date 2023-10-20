@@ -20,6 +20,7 @@ func (s *Stack) Pop() (int, error) {
 
 	value := s.head.value
 	s.head = s.head.next
+	s.Len--
 	return value, nil
 }
 

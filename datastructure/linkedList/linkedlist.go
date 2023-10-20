@@ -47,13 +47,13 @@ func (s *SingleLinkedList) Append(val int) {
 	}
 }
 
-func (s *SingleLinkedList) AppendAt(val int, index int) {
+func (s *SingleLinkedList) AppendAt(val int, index int) error {
 
 	var oldNode *Node
 	newNode := Node{value: val}
 
 	if index < 0 {
-		return
+		return fmt.Errorf("Invalid index\n")
 	}
 
 	if index == 0 {
@@ -63,7 +63,7 @@ func (s *SingleLinkedList) AppendAt(val int, index int) {
 	}
 
 	if index > s.len {
-		return
+		return fmt.Errorf("Invalid index\n")
 	}
 
 	ptr := s.head
@@ -73,10 +73,11 @@ func (s *SingleLinkedList) AppendAt(val int, index int) {
 			ptr.next = &newNode
 			newNode.next = oldNode
 			s.len++
-			return
+			return nil
 		}
 		ptr = ptr.next
 	}
+	return nil
 }
 
 func (s *SingleLinkedList) Remove() {
@@ -91,11 +92,11 @@ func (s *SingleLinkedList) Remove() {
 	}
 }
 
-func (s *SingleLinkedList) RemoveAt(index int) {
+func (s *SingleLinkedList) RemoveAt(index int) error {
 	var nextNode *Node
 
 	if index < 0 {
-		return
+		return fmt.Errorf("Invalid index\n")
 	}
 
 	if index == 0 {
@@ -105,7 +106,7 @@ func (s *SingleLinkedList) RemoveAt(index int) {
 	}
 
 	if index >= s.len {
-		return
+		return fmt.Errorf("Invalid index\n")
 	}
 
 	ptr := s.head
@@ -118,11 +119,11 @@ func (s *SingleLinkedList) RemoveAt(index int) {
 			nextNode = ptr.next
 			prevNode.next = nextNode
 			s.len--
-			return
+			return nil
 		}
 		ptr = ptr.next
 	}
-
+	return nil
 }
 
 func (s *SingleLinkedList) Prepend(item int) {
@@ -131,15 +132,15 @@ func (s *SingleLinkedList) Prepend(item int) {
 	s.len++
 }
 
-func (s *SingleLinkedList) Get(index int) int {
+func (s *SingleLinkedList) Get(index int) (int, error) {
 	ptr := s.head
 	for i := 0; i < s.len; i++ {
 		if i == index {
-			return ptr.value
+			return ptr.value, nil
 		}
 		ptr = ptr.next
 	}
-	return -1
+	return 0, fmt.Errorf("item not found\n")
 }
 
 func (s *SingleLinkedList) Length() int {

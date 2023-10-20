@@ -91,6 +91,57 @@ func (s *SingleLinkedList) Remove() {
 	}
 }
 
+func (s *SingleLinkedList) RemoveAt(index int) {
+	var nextNode *Node
+
+	if index < 0 {
+		return
+	}
+
+	if index == 0 {
+		nextNode = s.head.next
+		s.head = nextNode
+		s.len--
+	}
+
+	if index >= s.len {
+		return
+	}
+
+	ptr := s.head
+	var prevNode *Node
+	for i := 0; i < s.len; i++ {
+		if i == index-1 {
+			prevNode = ptr
+		}
+		if i == index {
+			nextNode = ptr.next
+			prevNode.next = nextNode
+			s.len--
+			return
+		}
+		ptr = ptr.next
+	}
+
+}
+
+func (s *SingleLinkedList) Prepend(item int) {
+	newNode := Node{value: item, next: s.head}
+	s.head = &newNode
+	s.len++
+}
+
+func (s *SingleLinkedList) Get(index int) int {
+	ptr := s.head
+	for i := 0; i < s.len; i++ {
+		if i == index {
+			return ptr.value
+		}
+		ptr = ptr.next
+	}
+	return -1
+}
+
 func (s *SingleLinkedList) Length() int {
 	return s.len
 }

@@ -2,7 +2,7 @@ package arrays
 
 import "testing"
 
-func TestContainsDuplicate(t *testing.T) {
+func Test_containsDuplicate(t *testing.T) {
 	tests := []struct {
 		input    []int
 		expected bool

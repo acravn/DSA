@@ -7,13 +7,13 @@ type Stack struct {
 	Len  int
 }
 
-func (s *Stack) Add(item int) {
+func (s *Stack) Add(item any) {
 	newNode := Node{value: item, next: s.head}
 	s.head = &newNode
 	s.Len++
 }
 
-func (s *Stack) Pop() (int, error) {
+func (s *Stack) Pop() (any, error) {
 	if s.head == nil {
 		return 0, fmt.Errorf("Empty stack\n")
 	}
@@ -24,6 +24,6 @@ func (s *Stack) Pop() (int, error) {
 	return value, nil
 }
 
-func (s *Stack) Peek() int {
+func (s *Stack) Peek() any {
 	return s.head.value
 }

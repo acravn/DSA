@@ -14,7 +14,7 @@ import "fmt"
 //}
 
 type Node struct {
-	value int
+	value any
 	next  *Node
 }
 
@@ -27,7 +27,7 @@ func NewSingleLinkedList() *SingleLinkedList {
 	return &SingleLinkedList{}
 }
 
-func (s *SingleLinkedList) Append(val int) {
+func (s *SingleLinkedList) Append(val any) {
 	n := Node{}
 	n.value = val
 
@@ -47,7 +47,7 @@ func (s *SingleLinkedList) Append(val int) {
 	}
 }
 
-func (s *SingleLinkedList) AppendAt(val int, index int) error {
+func (s *SingleLinkedList) AppendAt(val any, index int) error {
 
 	var oldNode *Node
 	newNode := Node{value: val}
@@ -126,13 +126,13 @@ func (s *SingleLinkedList) RemoveAt(index int) error {
 	return nil
 }
 
-func (s *SingleLinkedList) Prepend(item int) {
+func (s *SingleLinkedList) Prepend(item any) {
 	newNode := Node{value: item, next: s.head}
 	s.head = &newNode
 	s.len++
 }
 
-func (s *SingleLinkedList) Get(index int) (int, error) {
+func (s *SingleLinkedList) Get(index int) (any, error) {
 	ptr := s.head
 	for i := 0; i < s.len; i++ {
 		if i == index {
@@ -140,7 +140,7 @@ func (s *SingleLinkedList) Get(index int) (int, error) {
 		}
 		ptr = ptr.next
 	}
-	return 0, fmt.Errorf("item not found\n")
+	return nil, fmt.Errorf("item not found\n")
 }
 
 func (s *SingleLinkedList) Length() int {

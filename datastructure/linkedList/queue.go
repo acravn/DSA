@@ -8,7 +8,7 @@ type Queue struct {
 	Len  int
 }
 
-func (q *Queue) enqueue(item int) {
+func (q *Queue) enqueue(item any) {
 	newNode := Node{value: item}
 	// assumption queue is empty
 	if q.head == nil {
@@ -27,7 +27,7 @@ func (q *Queue) enqueue(item int) {
 	q.Len++
 }
 
-func (q *Queue) deque() (int, error) {
+func (q *Queue) deque() (any, error) {
 	if q.head == nil {
 		return 0, fmt.Errorf("Empty queue\n")
 	}
@@ -38,6 +38,6 @@ func (q *Queue) deque() (int, error) {
 	return val, nil
 }
 
-func (q *Queue) peek() int {
+func (q *Queue) peek() any {
 	return q.head.value
 }

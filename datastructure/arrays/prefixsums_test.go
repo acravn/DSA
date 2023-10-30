@@ -31,3 +31,30 @@ func TestRunningSum(t *testing.T) {
 		}
 	}
 }
+
+func TestMinStartValue(t *testing.T) {
+	table := []struct {
+		arr      []int
+		expected int
+	}{
+		{
+			arr:      []int{-3, 2, -3, 4, 2},
+			expected: 5,
+		},
+		{
+			arr:      []int{1, 2},
+			expected: 1,
+		},
+		{
+			arr:      []int{1, -2, -3},
+			expected: 5,
+		},
+	}
+
+	for _, v := range table {
+		res := minStartValue(v.arr)
+		if res != v.expected {
+			t.Errorf("Got %v, expected %v", res, v.expected)
+		}
+	}
+}

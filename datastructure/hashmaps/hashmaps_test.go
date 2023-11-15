@@ -102,3 +102,31 @@ func TestLargestUniqueNumber(t *testing.T) {
 		}
 	}
 }
+
+func TestMaxNumBalloons(t *testing.T) {
+	tables := []struct {
+		input  string
+		output int
+	}{
+		{
+			input:  "nlaebolko",
+			output: 1,
+		},
+		//{
+		//	input:  "loonbalxballpoon",
+		//	output: 2,
+		//},
+		//{
+		//	input:  "leetcode",
+		//	output: 0,
+		//},
+	}
+
+	for _, test := range tables {
+		res := maxNumberOfBalloons(test.input)
+
+		if res != test.output {
+			t.Errorf("Expected %v, got %v", test.output, res)
+		}
+	}
+}

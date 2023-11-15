@@ -120,3 +120,44 @@ func largestUniqueNumber(nums []int) int {
 
 	return l
 }
+
+// Given a string text, you want to use the characters of text to form as many instances of the word "balloon" as possible.
+// You can use each character in text at most once. Return the maximum number of instances that can be formed.
+func maxNumberOfBalloons(text string) int {
+	letterMap := make(map[string]int, 5)
+	for _, v := range text {
+		letter := string(v)
+
+		if letter == "b" {
+			letterMap["b"] += 1
+		}
+		if letter == "a" {
+			letterMap["a"] += 1
+		}
+		if letter == "l" {
+			letterMap["l"] += 1
+		}
+		if letter == "o" {
+			letterMap["o"] += 1
+		}
+		if letter == "n" {
+			letterMap["n"] += 1
+		}
+
+	}
+
+	count := letterMap["b"]
+	if letterMap["a"] < count {
+		count = letterMap["a"]
+	}
+	if letterMap["l"] < count*2 {
+		count = letterMap["l"] / 2
+	}
+	if letterMap["o"] < count*2 {
+		count = letterMap["o"] / 2
+	}
+	if letterMap["n"] < count {
+		count = letterMap["n"]
+	}
+	return count
+}

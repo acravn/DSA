@@ -1,6 +1,9 @@
 package hashmaps
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestPangram(t *testing.T) {
 	table := []struct {
@@ -48,6 +51,54 @@ func TestCountElements(t *testing.T) {
 		res := countElements(v.input)
 		if res != v.expected {
 			t.Errorf("Expected %d, got %d", v.expected, res)
+		}
+	}
+}
+
+func TestFindWinners(t *testing.T) {
+	tables := []struct {
+		input  [][]int
+		output [][]int
+	}{
+		{
+			input:  [][]int{{1, 3}, {2, 3}, {3, 6}, {5, 6}, {5, 7}, {4, 5}, {4, 8}, {4, 9}, {10, 4}, {10, 9}},
+			output: [][]int{{1, 2, 10}, {4, 5, 7, 8}},
+		},
+	}
+
+	for _, test := range tables {
+		res := findWinners(test.input)
+
+		if !reflect.DeepEqual(res, test.output) {
+			t.Errorf("Expected %v, got %v", test.output, res)
+		}
+	}
+}
+
+func TestLargestUniqueNumber(t *testing.T) {
+	tables := []struct {
+		input  []int
+		output int
+	}{
+		{
+			input:  []int{5, 7, 3, 9, 4, 9, 8, 3, 1},
+			output: 8,
+		},
+		{
+			input:  []int{9, 9, 8, 8},
+			output: -1,
+		},
+		{
+			input:  []int{9, 8, 8, 9, 9},
+			output: -1,
+		},
+	}
+
+	for _, test := range tables {
+		res := largestUniqueNumber(test.input)
+
+		if res != test.output {
+			t.Errorf("Expected %v, got %v", test.output, res)
 		}
 	}
 }

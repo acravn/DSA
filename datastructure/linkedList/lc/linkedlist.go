@@ -22,17 +22,12 @@ func middleNode(head *ListNode) *ListNode {
 // Given the head of a sorted linked list, delete all duplicates such that each
 // element appears only once. Return the linked list sorted as well.
 func deleteDuplicates(head *ListNode) *ListNode {
-	node := head
-	val := node.Val
-
-	for node.Next != nil {
-		if val == node.Next.Val {
-			node.Next = node.Next.Next
-		} else {
-			node = node.Next
-			val = node.Val
+	res := head
+	for head != nil {
+		for head.Next != nil && head.Next.Val == head.Val {
+			head.Next = head.Next.Next
 		}
+		head = head.Next
 	}
-
-	return head
+	return res
 }

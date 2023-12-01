@@ -1,5 +1,7 @@
 package lc
 
+import "log"
+
 // Given the head of a singly linked list, return the middle node of the linked list.
 // If there are two middle nodes, return the second middle node.
 type ListNode struct {
@@ -30,4 +32,53 @@ func deleteDuplicates(head *ListNode) *ListNode {
 		head = head.Next
 	}
 	return res
+}
+
+func printLL(head *ListNode) {
+	for {
+		log.Println("Val: ", head.Val, "Next: ", head.Next)
+		if head.Next == nil {
+			break
+		}
+		head = head.Next
+	}
+}
+
+// reverse a linked list
+func reverseLL(head *ListNode) *ListNode {
+	node := head
+	var prev *ListNode
+	for node != nil {
+		node, prev, node.Next = node.Next, node, prev
+	}
+
+	head = prev
+
+	return head
+}
+
+// Given the head of a singly linked list and two integers left and right where left <= right,
+// reverse the nodes of the list from position left to position right, and return the reversed list.
+func reverseBetween(head *ListNode, left int, right int) *ListNode {
+	if head == nil || left == right {
+		return head
+	}
+
+	dummy := &ListNode{0, head}
+	prev := dummy
+
+	for i := 0; i < left-1; i++ {
+		prev = prev.Next
+	}
+
+	current := prev.Next
+
+	for i := 0; i < right-left; i++ {
+		nextNode := current.Next
+		current.Next = nextNode.Next
+		nextNode.Next = prev.Next
+		prev.Next = nextNode
+	}
+
+	return dummy.Next
 }

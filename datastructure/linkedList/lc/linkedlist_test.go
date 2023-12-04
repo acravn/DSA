@@ -36,10 +36,3 @@ func Test_MiddleNode(t *testing.T) {
 	}
 
 }
-
-func Test_DeleteDuplicate(t *testing.T) {
-	tests := []struct {
-		input  *ListNode
-		output int
-	}{}
-}

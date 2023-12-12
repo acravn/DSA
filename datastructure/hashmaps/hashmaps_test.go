@@ -130,3 +130,62 @@ func TestMaxNumBalloons(t *testing.T) {
 		}
 	}
 }
+
+func TestCanConstruct(t *testing.T) {
+	tables := []struct {
+		inputA string
+		inputB string
+		output bool
+	}{
+		{
+			inputA: "a",
+			inputB: "b",
+			output: false,
+		},
+		{
+			inputA: "aa",
+			inputB: "ab",
+			output: false,
+		},
+		{
+			inputA: "aa",
+			inputB: "aab",
+			output: true,
+		},
+	}
+
+	for _, test := range tables {
+		res := canConstruct(test.inputA, test.inputB)
+
+		if res != test.output {
+			t.Errorf("Expected %v, got %v", test.output, res)
+		}
+	}
+}
+
+func TestNumJewelsInStones(t *testing.T) {
+	tables := []struct {
+		inputA string
+		inputB string
+		output int
+	}{
+		{
+			inputA: "aA",
+			inputB: "aAAbbbb",
+			output: 3,
+		},
+		{
+			inputA: "z",
+			inputB: "ZZ",
+			output: 0,
+		},
+	}
+
+	for _, test := range tables {
+		res := numJewelsInStones(test.inputA, test.inputB)
+
+		if res != test.output {
+			t.Errorf("Expected %v, got %v", test.output, res)
+		}
+	}
+}

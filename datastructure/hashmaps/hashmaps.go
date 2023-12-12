@@ -161,3 +161,64 @@ func maxNumberOfBalloons(text string) int {
 	}
 	return count
 }
+
+// Given two strings ransomNote and magazine, return true if ransomNote can be constructed by using the letters from magazine and false otherwise.
+// Each letter in magazine can only be used once in ransomNote.
+func canConstruct(ransomNote string, magazine string) bool {
+
+	if len(ransomNote) > len(magazine) {
+		return false
+	}
+
+	magazineMap := make(map[string]int, len(magazine))
+	for _, v := range magazine {
+		letter := string(v)
+		if _, ok := magazineMap[letter]; !ok {
+			magazineMap[letter] = 1
+		} else {
+			magazineMap[letter] += 1
+		}
+	}
+
+	for _, v := range ransomNote {
+		letter := string(v)
+
+		if val, ok := magazineMap[letter]; !ok {
+			return false
+		} else if val > 0 {
+			magazineMap[letter] -= 1
+		} else {
+			delete(magazineMap, letter)
+			return false
+		}
+
+	}
+
+	return true
+}
+
+// You're given strings jewels representing the types of stones that are jewels, and stones representing the stones you have.
+// Each character in stones is a type of stone you have. You want to know how many of the stones you have are also jewels.
+// Letters are case sensitive, so "a" is considered a different type of stone from "A".
+func numJewelsInStones(jewels string, stones string) int {
+	stoneCounter := make(map[string]int, len(stones))
+	var counter int
+	for _, v := range stones {
+		letter := string(v)
+		if _, ok := stoneCounter[letter]; !ok {
+			stoneCounter[letter] = 1
+		} else {
+			stoneCounter[letter] += 1
+		}
+	}
+
+	for _, v := range jewels {
+		letter := string(v)
+		val, ok := stoneCounter[letter]
+		if ok {
+			counter += val
+		}
+	}
+
+	return counter
+}

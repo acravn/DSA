@@ -9,18 +9,18 @@ class TestSolution(unittest.TestCase):
 
     def test_simplifyPath(self):
         cases = [
-            # {
-            #     "input": "/home/",
-            #     "output": "/home"
-            # },
-            # {
-            #     "input": "/../",
-            #     "output": "/"
-            # },
-            # {
-            #     "input": "/home//foo/",
-            #     "output": "/home/foo"
-            # },
+            {
+                "input": "/home/",
+                "output": "/home"
+            },
+            {
+                "input": "/../",
+                "output": "/"
+            },
+            {
+                "input": "/home//foo/",
+                "output": "/home/foo"
+            },
             {
                 "input": "/a/./b/../../c/",
                 "output": "/c"
@@ -29,4 +29,24 @@ class TestSolution(unittest.TestCase):
 
         for case in cases:
             res = self.s.simplifyPath(case["input"])
+            self.assertEqual(res, case['output'])
+
+    def test_makeGood(self):
+        cases = [
+            {
+                "input": "leEeetcode",
+                "output": "leetcode"
+            },
+            {
+                "input": "abBAcC",
+                "output": ""
+            },
+            {
+                "input": "s",
+                "output": "s"
+            }
+        ]
+
+        for case in cases:
+            res = self.s.makeGood(case["input"])
             self.assertEqual(res, case['output'])
